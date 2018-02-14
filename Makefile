@@ -10,7 +10,7 @@ cxx: bin/exec
 
 bin/exec: main.cxx
 	if [ ! -d 'bin' ]; then mkdir 'bin'; fi
-	clang -lc++ -std=c++14 -O3 -flto -Wall -Wextra -pedantic main.cxx -o bin/exec
+	clang -lc++ -std=c++14 -O3 -flto -march=native -Wall -Wextra -pedantic main.cxx -o bin/exec
 
 js:
 	if [ ! -d 'out' ]; then mkdir 'out'; fi
