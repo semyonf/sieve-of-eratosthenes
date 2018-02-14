@@ -15,4 +15,4 @@ bin/exec: main.cxx
 js:
 	if [ ! -d 'out' ]; then mkdir 'out'; fi
 	node main.js > out/js.txt
-	# cat out/cxx.txt
+	# cat out/js.txt
