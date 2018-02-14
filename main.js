@@ -18,13 +18,13 @@ for (let i = 0; i < amountOfBlocks; ++i) {
 
 let curBlock = 0, block, newPrime;
 
-while (curBlock < blocks.length) {
+while (curBlock < amountOfBlocks) {
   block = blocks[curBlock];
 
   newPrime = block.last - ((Math.log2(block.data)) << 0);
   primes.push(newPrime);
 
-  for (let i = curBlock; i < blocks.length; ++i) {
+  for (let i = curBlock; i < amountOfBlocks; ++i) {
     block = blocks[i];
     blocks[i].data = block.data & getMask(newPrime, block.last);
   }

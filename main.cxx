@@ -33,13 +33,13 @@ int main() {
             static_cast<unsigned>(blockSize + 1 + (i * blockSize))
         });
 
-    printf("%lu blocks of %d bits\n", blocks.size(), blockSize);
+    printf("%hd blocks of %d bits\n", amountOfBlocks, blockSize);
 
-    unsigned long curBlock = 0;
+    short curBlock = 0;
     int newPrime;
     Block block;
 
-    while (curBlock < blocks.size()) {
+    while (curBlock < amountOfBlocks) {
         block = blocks[curBlock];
 
         newPrime = (block.data == 0)
@@ -48,7 +48,7 @@ int main() {
 
         primes.push_back(newPrime);
 
-        for (unsigned long i = curBlock; i < blocks.size(); ++i) {
+        for (short i = curBlock; i < amountOfBlocks; ++i) {
             block = blocks[i];
             blocks[i].data = block.data & getMask(newPrime, block.last);
         }
