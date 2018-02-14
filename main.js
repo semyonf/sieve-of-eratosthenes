@@ -8,6 +8,8 @@ const blocks = [], primes = [];
 const dataCell = 0xffffffff;
 const blockSize = Math.floor(Math.log2(dataCell)) + 1;
 
+console.info(`${amountOfBlocks} blocks of ${blockSize} bits`);
+
 for (let i = 0; i < amountOfBlocks; ++i) {
   blocks.push({
     data: dataCell, last: blockSize + 1 + (i * blockSize)
@@ -43,5 +45,9 @@ function getMask(n, last) {
   return mask;
 }
 
-// primes.forEach(prime => console.log(prime));
-console.log(primes.pop(), primes.length);
+let res = '';
+
+primes.forEach(prime => res += `${prime} `);
+
+console.info(res);
+console.info(`(${primes.length}) items`);
