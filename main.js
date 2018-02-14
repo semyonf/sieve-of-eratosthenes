@@ -19,10 +19,10 @@ let curBlock = 0, block, newPrime;
 while (curBlock < blocks.length) {
   block = blocks[curBlock];
 
-  newPrime = block.last - Math.floor(Math.log2(block.data));
+  newPrime = block.last - ((Math.log2(block.data)) << 0);
   primes.push(newPrime);
 
-  for (let i = 0; i < blocks.length; ++i) {
+  for (let i = curBlock; i < blocks.length; ++i) {
     block = blocks[i];
     blocks[i].data = block.data & getMask(newPrime, block.last);
   }
@@ -34,9 +34,9 @@ while (curBlock < blocks.length) {
 
 function getMask(n, last) {
   let mask = 0;
-  for (let i = last - blockSize; i <= last; ++i) {
+  for (let i = last - blockSize + 1; i <= last; ++i) {
     if (i % n) {
-      mask += Math.pow(2, last - i);
+      mask += 1 << (last - i);
     }
   }
 
