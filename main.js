@@ -18,7 +18,12 @@ for (let i = 0; i < amountOfBlocks; ++i) {
 
 let curBlock = 0, block, newPrime;
 
-while (curBlock < amountOfBlocks) {
+for (;curBlock < amountOfBlocks;) {
+  if (blocks[curBlock].data === 0) {
+    ++curBlock;
+    continue;
+  }
+
   block = blocks[curBlock];
 
   newPrime = block.last - ((Math.log2(block.data)) << 0);
@@ -27,10 +32,6 @@ while (curBlock < amountOfBlocks) {
   for (let i = curBlock; i < amountOfBlocks; ++i) {
     block = blocks[i];
     blocks[i].data = block.data & getMask(newPrime, block.last);
-  }
-
-  if (blocks[curBlock].data === 0) {
-    ++curBlock;
   }
 }
 
