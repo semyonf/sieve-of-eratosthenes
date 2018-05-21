@@ -5,12 +5,12 @@
 #include <cmath>
 #include <vector>
 
+const unsigned dataCell = 0xffffffff;
 const int amountOfBlocks = 5000;
-const unsigned long dataCell = 0xffffffff;
 const int blockSize = (int(log2(dataCell)) + 1) << 0;
 
 struct DataBlock {
-    unsigned long data;
+    unsigned data;
     int number;
     int lastNumber;
     int firstNumber;
@@ -20,7 +20,7 @@ std::vector<DataBlock> blocks;
 std::vector<int> primes;
 
 int getMask(int prime, int lastNumber, int firstNumber) {
-    unsigned long mask = dataCell;
+    unsigned mask = dataCell;
     for (int number = firstNumber; number <= lastNumber; ++number) {
         if (number % prime == 0) {
             mask -= 1 << (lastNumber - number);
@@ -60,7 +60,7 @@ int main() {
         }
     }
 
-    for (unsigned long i = 0; i < primes.size(); ++i) {
+    for (size_t i = 0; i < primes.size(); ++i) {
         printf("%d ", primes[i]);
     }
 
