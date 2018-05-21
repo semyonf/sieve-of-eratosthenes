@@ -35,11 +35,11 @@ while (curBlock < amountOfBlocks) {
   }
 }
 
-function getMask(n, last) {
-  let mask = 0;
-  for (let i = last - blockSize + 1; i <= last; ++i) {
-    if (i % n) {
-      mask += 1 << (last - i);
+function getMask(prime, last) {
+  let mask = dataCell;
+  for (let number = last - blockSize + 1; number <= last; ++number) {
+    if (number % prime === 0) {
+      mask -= 1 << (last - number);
     }
   }
 
