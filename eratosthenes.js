@@ -27,7 +27,7 @@ while (currentBlockNumber < amountOfBlocks) {
   }
 
   block = blocks[currentBlockNumber];
-  newPrime = block.lastNumber - ((Math.log2(block.data)) << 0);
+  newPrime = block.lastNumber - (Math.log2(block.data) << 0);
   primes.push(newPrime);
 
   for (let i = currentBlockNumber; i < amountOfBlocks; ++i) {
