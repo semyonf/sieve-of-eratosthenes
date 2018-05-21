@@ -1,12 +1,9 @@
-.PHONY: all js cxx
-
-all: cxx js
-	md5 out/*
+.PHONY: compare js cxx
 
 cxx: bin/exec
 	if [ ! -d 'out' ]; then mkdir 'out'; fi
 	./bin/exec > out/cxx.txt
-	# cat out/cxx.txt
+	cat out/cxx.txt
 
 bin/exec: main.cxx
 	if [ ! -d 'bin' ]; then mkdir 'bin'; fi
@@ -16,3 +13,6 @@ js:
 	if [ ! -d 'out' ]; then mkdir 'out'; fi
 	node main.js > out/js.txt
 	# cat out/js.txt
+
+compare: cxx js
+	md5 out/*
