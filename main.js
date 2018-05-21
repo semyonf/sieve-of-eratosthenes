@@ -3,43 +3,45 @@
  */
 
 const amountOfBlocks = 5000;
-
-const blocks = [], primes = [];
 const dataCell = 0xffffffff;
-const blockSize = Math.floor(Math.log2(dataCell)) + 1;
+const blocks = [], primes = [];
+const blockSize = Math.log2(dataCell) + 1 << 0;
 
 console.info(`${amountOfBlocks} blocks of ${blockSize} bits`);
 
 for (let i = 0; i < amountOfBlocks; ++i) {
   blocks.push({
-    data: dataCell, last: blockSize + 1 + (i * blockSize)
+    data: dataCell,
+    number: i,
+    lastNumber: blockSize + 1 + (i * blockSize),
+    firstNumber: 2 + (i * blockSize)
   });
 }
 
-let curBlock = 0, block, newPrime;
+let currentBlockNumber = 0, block, newPrime;
 
-while (curBlock < amountOfBlocks) {
-  if (blocks[curBlock].data === 0) {
-    ++curBlock;
+while (currentBlockNumber < amountOfBlocks) {
+  if (blocks[currentBlockNumber].data === 0) {
+    ++currentBlockNumber;
     continue;
   }
 
-  block = blocks[curBlock];
-
-  newPrime = block.last - ((Math.log2(block.data)) << 0);
+  block = blocks[currentBlockNumber];
+  newPrime = block.lastNumber - ((Math.log2(block.data)) << 0);
   primes.push(newPrime);
 
-  for (let i = curBlock; i < amountOfBlocks; ++i) {
-    block = blocks[i];
-    blocks[i].data = block.data & getMask(newPrime, block.last);
+  for (let i = currentBlockNumber; i < amountOfBlocks; ++i) {
+    blocks[i].data = blocks[i].data & getMask(
+      newPrime, blocks[i].lastNumber, blocks[i].firstNumber
+    );
   }
 }
 
-function getMask(prime, last) {
+function getMask(prime, lastNumber, firstNumber) {
   let mask = dataCell;
-  for (let number = last - blockSize + 1; number <= last; ++number) {
+  for (let number = firstNumber; number <= lastNumber; ++number) {
     if (number % prime === 0) {
-      mask -= 1 << (last - number);
+      mask -= 1 << (lastNumber - number);
     }
   }
 
@@ -47,8 +49,5 @@ function getMask(prime, last) {
 }
 
 let res = '';
-
 primes.forEach(prime => res += `${prime} `);
-
-console.info(res);
-console.info(`(${primes.length}) items`);
+console.info(res, `(${primes.length}) items`);
