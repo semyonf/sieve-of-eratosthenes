@@ -18,7 +18,7 @@ for (let i = 0; i < amountOfBlocks; ++i) {
 
 let curBlock = 0, block, newPrime;
 
-for (;curBlock < amountOfBlocks;) {
+while (curBlock < amountOfBlocks) {
   if (blocks[curBlock].data === 0) {
     ++curBlock;
     continue;
