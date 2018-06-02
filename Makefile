@@ -16,7 +16,7 @@ ifeq ($(shell uname), Darwin)
 	####################################################
 	clang++ $(COMPILER_FLAGS) $(CLANG_OMP_FLAGS) eratosthenes.cxx -o bin/eratosthenes
 else
-	g++ $(COMPILER_FLAGS) eratosthenes.cxx -o bin/eratosthenes
+	g++ $(COMPILER_FLAGS) -fopenmp eratosthenes.cxx -o bin/eratosthenes
 endif
 
 js:

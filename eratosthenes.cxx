@@ -66,5 +66,5 @@ int main() {
         printf("%d ", primes[i]);
     }
 
-    printf(" (%lu) items\n", primes.size());
+    printf(" (%u) items\n", primes.size());
 }
