@@ -4,9 +4,10 @@
 
 #include <cmath>
 #include <vector>
+#include <cstdio>
 
 const unsigned dataCell = 0xffffffff;
-const int amountOfBlocks = 5000;
+const int amountOfBlocks = 5000; // 7030 for first 20000 primes
 const int blockSize = (int(log2(dataCell)) + 1) << 0;
 
 struct DataBlock {
@@ -38,7 +39,7 @@ int main() {
             dataCell, i, blockSize + 1 + (i * blockSize), 2 + (i * blockSize)
         });
     }
-    
+
     int currentBlockNumber = 0;
     DataBlock block;
     int newPrime;
@@ -53,6 +54,7 @@ int main() {
         newPrime = block.lastNumber - (int(log2(block.data)) << 0);
         primes.push_back(newPrime);
 
+        #pragma omp parallel for
         for (int i = currentBlockNumber; i < amountOfBlocks; ++i) {
           blocks[i].data = blocks[i].data & getMask(
             newPrime, blocks[i].lastNumber, blocks[i].firstNumber
