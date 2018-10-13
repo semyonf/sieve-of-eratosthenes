@@ -44,7 +44,7 @@ int main() {
     DataBlock block;
     int newPrime;
 
-    while (currentBlockNumber < amountOfBlocks) {
+    while (currentBlockNumber <= amountOfBlocks-1) {
         if (blocks[currentBlockNumber].data == 0) {
           ++currentBlockNumber;
           continue;
@@ -55,7 +55,7 @@ int main() {
         primes.push_back(newPrime);
 
         #pragma omp parallel for
-        for (int i = currentBlockNumber; i < amountOfBlocks; ++i) {
+        for (int i = currentBlockNumber; i <= amountOfBlocks-1; ++i) {
           blocks[i].data = blocks[i].data & getMask(
             newPrime, blocks[i].lastNumber, blocks[i].firstNumber
           );
