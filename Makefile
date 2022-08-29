@@ -11,9 +11,6 @@ cxx: bin/eratosthenes
 bin/eratosthenes: eratosthenes.cxx Makefile
 	@if [ ! -d 'bin' ]; then mkdir 'bin'; fi
 ifeq ($(shell uname), Darwin)
-	####################################################
-	### For OpenMP on Macintosh: brew install libomp ###
-	####################################################
 	clang++ $(COMPILER_FLAGS) $(CLANG_OMP_FLAGS) eratosthenes.cxx -o bin/eratosthenes
 else
 	g++ $(COMPILER_FLAGS) -fopenmp eratosthenes.cxx -o bin/eratosthenes
